@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/chemicals/vendors/vis/dist/vis.min.js') }}" /></script>
+    {% if code is not empty %}
+    <script>
+        {{ code | raw }}
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="stylesheet" src="{{ asset('bundles/chemicals/vendors/vis/dist/vis.min.css') }}" />
+    <style>
+        #molecule-3d, #molecule-3d canvas {
+            height: 100%;
+            min-height:400px;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Molecule : {{ molecule.name }}
+{% endblock %}
+    
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <h1>{{ molecule.name }} ({{ molecule.formula }})</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Technical data
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div class="col-md-6">
+                                    <p>Composed by {{ molecule.atomsGroups | length }} groups of multiple atoms.</p>
+                                    <ul>
+                                        {% for atomsGroup in molecule.atomsGroups %}
+                                        <li>
+                                            <h2>{{ atomsGroup.name }}</h2>
+                                            <ul>
+                                                <li>Leading-atom : {{ atomsGroup.mainAtom.name }}</li>
+                                                {% for atoms in atomsGroup.atoms %}
+                                                <li>{{ atoms.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="molecule-3d" class="col-md-12"></div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Dump
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                {{ dump(molecule) }}
+                            </div>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

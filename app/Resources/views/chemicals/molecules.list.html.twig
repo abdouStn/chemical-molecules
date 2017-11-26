@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Molecules{%endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Molecules</h1>
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a class="btn btn-default btn-success" href="{{ path('chemicals_molecules_add') }}" role="button"><span class="glyphicon glyphicon-plus"> </span>Add new molecule</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% if molecules is not empty %}
+                <div class="alert alert-info" role="alert">
+                    <p>Number of molecules in database : <span class="badge">{{ molecules | length }}</span></p>
+                </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for molecule in molecules %}
+                    <tr>
+                        <td>{{ molecule }}</td>
+                        <td>
+                            <a class="btn btn-default btn-primary" href="{{ path('chemicals_molecules_display', { 'id': molecule.id } ) }}"><span class="glyphicon glyphicon-eye-open"> </span></a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-default btn-warning" href="{{ path('chemicals_molecules_edit', { 'id': molecule.id } ) }}"><span class="glyphicon glyphicon-pencil"> </span></a>
+                                <a class="btn btn-default btn-danger delete-feature" href="{{ path('chemicals_molecules_delete', { 'id': molecule.id } ) }}"><span class="glyphicon glyphicon-remove"> </span></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>There is no molecule in the database.</p>
+            {% endif %}
+        {% include 'part/pagination.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

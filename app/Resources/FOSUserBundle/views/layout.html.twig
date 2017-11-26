@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Molecule Renderer{% endblock %}
+{% block body %}
+    <div id="container">
+        <div id="welcome">
+            <h1>
+                {{ block('title') }}
+            </h1>
+        </div>
+        <div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
+                <a class="btn btn-warning" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+        </div>
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
+{% endblock %}

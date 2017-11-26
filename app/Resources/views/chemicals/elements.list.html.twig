@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Elements{%endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Elements</h1>
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a class="btn btn-default btn-success" href="{{ path('chemicals_elements_add') }}" role="button"><span class="glyphicon glyphicon-plus"> </span>Add new element</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% if atoms is not empty %}
+                <div class="alert alert-info" role="alert">
+                    <p>Number of elements in database : <span class="badge">{{ atoms | length }}</span></p>
+                </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Formula</th>
+                        <th>Atomic Mass</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for atom in atoms%}
+                    <tr>
+                        <td>{{ atom.name }}</td>
+                        <td>{{ atom.formula }}</td>
+                        <td>{{ atom.mass }}u</td>
+                            <td>
+                                <a class="btn btn-default btn-primary" href="{{ path('chemicals_elements_display', { 'id': atom.id } ) }}"><span class="glyphicon glyphicon-eye-open"> </span></a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="btn btn-default btn-warning" href="{{ path('chemicals_elements_edit', { 'id': atom.id } ) }}"><span class="glyphicon glyphicon-pencil"> </span></a>
+                                    <a class="btn btn-default btn-danger delete-feature" href="{{ path('chemicals_elements_delete', { 'id': atom.id } ) }}"><span class="glyphicon glyphicon-remove"> </span></a>
+                                {% endif %}
+                            </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>There is no element in the database.</p>
+            {% endif %}
+        {% include 'part/pagination.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

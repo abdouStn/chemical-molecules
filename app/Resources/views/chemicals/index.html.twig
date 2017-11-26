@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Chemicals IT {% endblock %}
+
+{% block jumbotron %}
+    {% include 'part/jumbotron.html.twig' %}
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block body %}
+        <div id="row">
+            <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 dashboard-figures">
+                <h2>Elements</h2>
+                <p>A chemical element or element is a species of atoms having the same number of protons in their atomic nuclei (i.e. the same atomic number, Z). There are 118 elements that have been identified, of which the first 94 occur naturally on Earth with the remaining 24 being synthetic elements. There are 80 elements that have at least one stable isotope and 38 that have exclusively radioactive isotopes, which decay over time into other elements. Iron is the most abundant element (by mass) making up Earth, while oxygen is the most common element in the crust of Earth.</p>
+                <p>Currently, we have <span class="badge">{{ nbElts }}</span> elements in our database.</p>
+                <p><a href="{{ path('chemicals_elements_list') }}" class="btn btn-primary dashboard-figures-btn">Check our elements !</a>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 dashboard-figures">
+                <h2>Atoms</h2>
+                <p>An atom is the smallest constituent unit of ordinary matter that has the properties of a chemical element. Every solid, liquid, gas, and plasma is composed of neutral or ionized atoms. Atoms are very small; typical sizes are around 100 pm (a ten-billionth of a meter, in the short scale). However, atoms do not have well-defined boundaries, and there are different ways to define their size that give different but close values.</p>
+                <p>Currently, we have <span class="badge">{{ nbAtoms }}</span> atoms in our database.</p>
+                <p><a href="{{ path('chemicals_atoms_list') }}" class="btn btn-primary dashboard-figures-btn">Check our atoms !</a>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 dashboard-figures">
+                <h2>Molecules</h2>
+                <p class="text-danger">A molecule is an electrically neutral group of two or more atoms held together by chemical bonds.</p>
+                <p>Molecules are distinguished from ions by their lack of electrical charge. However, in quantum physics, organic chemistry, and biochemistry, the term molecule is often used less strictly, also being applied to polyatomic ions.</p>
+                <p>Currently, we have <span class="badge">{{ nbMolecules }}</span> molecules in our database.</p>
+                <p><a href="{{ path('chemicals_molecules_list') }}" class="btn btn-primary dashboard-figures-btn">Check our molecules !</a>
+            </div>
+        </div>
+{% endblock %}

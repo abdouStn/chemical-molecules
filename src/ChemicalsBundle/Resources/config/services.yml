@@ -1,0 +1,9 @@
+services:
+    chemicals.rest.helper:
+        class: ChemicalsBundle\Utils\RESTHelper
+
+    chemicals.visjs.helper:
+        class: ChemicalsBundle\Utils\VisJsHelper
+
+    chemicals.periodic.helper:
+        class: ChemicalsBundle\Utils\PeriodicElementProvider

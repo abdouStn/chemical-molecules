@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {% include 'inc/style.raw.html.twig' %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        {% include 'inc/javascript.ie8.html.twig' %}
+    <![endif]-->
+  </head>
+  <body>
+
+   {% block navbar %}
+       {% include 'part/navbar.html.twig' %}
+   {% endblock %}
+
+
+    <div class="container" role="main">
+        {% block flashbag %}
+            {% include 'inc/flashbag.html.twig' %}
+        {% endblock %}
+        
+        {% block breadcrumb %}
+            {{ breadcrumbs() }}
+        {% endblock %}
+
+        {% block jumbotron %}{% endblock %}
+         <div class="clearfix"></div>    
+        <hr>
+        {% block body %}{% endblock %}
+        <div class="clearfix"></div>
+        <hr>
+        {% block footer %}
+            {% include 'part/footer.html.twig' %}
+        {% endblock %}
+    </div> <!-- /container -->
+
+    {% block javascripts %}
+        {% include 'inc/javascript.raw.html.twig' %}
+    {% endblock %}
+  </body>
+</html>
+
+

@@ -1,0 +1,6 @@
+{% if is_granted('ROLE_ADMIN') %}
+    {% include 'part/delete-modal.html.twig' %}
+{% endif %}
+<footer>
+    <p>© Copyright 2016-2017 | Technologies used : <a href="https://symfony.com/">Symfony 3.1</a>, <a href="http://getbootstrap.com/getting-started/#download">Bootstrap 3</a>, <a href="https://bower.io/">Bower</a>, <a href="https://getcomposer.org/">Composer</a>, <a href="https://jquery.com/">jQuery</a>, <a href="http://visjs.org/">vis.js</a>, <a href="http://www.chartjs.org/">Chart.js</a></p>
+</footer>

@@ -1,0 +1,38 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+div.atomsGroups>div>div>div>div {
+    background: #FEFEFE;
+    padding: 10px;
+}
+
+ul.tags {
+    list-style-type: none;
+}
+
+.tags li {
+    margin-bottom : 10px;
+    background-color: #ECECEC;
+    padding: 10px;
+}
+
+.tags li.adder-li {
+    background-color:transparent;
+}

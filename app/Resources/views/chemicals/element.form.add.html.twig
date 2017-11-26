@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Add a new element {% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>{% block title_main %}Create new Element{% endblock %}</h1>
+
+    {{ form_start(form) }}
+    {% if form.vars.errors|length %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Errors:</span>
+            <p> Errors :
+            {{ form_errors(form) }}
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.formula) }}
+        {{ form_widget(form.formula, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.mass) }}
+        {{ form_widget(form.mass, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_widget(form._token) }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default btn-success">{% block btn_submit %}Add element{% endblock %}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

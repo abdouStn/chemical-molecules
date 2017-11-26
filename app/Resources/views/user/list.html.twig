@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{%endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Users</h1>
+            </div>
+            {% if users is not empty %}
+                <div class="alert alert-info" role="alert">
+                    <p>Number of users in database : <span class="badge">{{ users | length }}</span></p>
+                </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user }}</td>
+                        <td>
+                            <ul>
+                                {% for role in user.roles %}
+                                    <li>{{ role }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            {% if not user.hasRole('ROLE_SUPER_ADMIN') %}
+                                {% if user.hasRole('ROLE_ADMIN') and is_granted('ROLE_SUPER_ADMIN') %}
+                                    <a href="{{ path('app_users_unset_admin', {'id': user.id}) }}" class="btn btn-warning" >
+                                        Unset admin
+                                    </a>
+                                {% elseif not user.hasRole('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_users_set_admin', {'id': user.id}) }}" class="btn btn-primary" >
+                                        Set admin
+                                    </a>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            {% else %}
+                                Gods can't be shrinked down !
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>There is no user in the database.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

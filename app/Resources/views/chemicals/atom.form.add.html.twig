@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Add a new atom {% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>{% block title_main %}Create new Atom{% endblock %}</h1>
+    <p>An atom is a basic unit of matter consisting of a nucleus within a cloud of one or more electrons.</p>
+    {{ form_start(form) }}
+    {% if form.vars.errors|length %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Errors:</span>
+            <p> Errors :
+            {{ form_errors(form) }}
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.element) }}
+        {{ form_widget(form.element, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_widget(form._token) }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default btn-success">{% block btn_submit %}Add atom{% endblock %}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

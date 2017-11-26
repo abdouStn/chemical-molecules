@@ -1,0 +1,102 @@
+# Elements
+chemicals_elements_add:
+    path: /chemicals/elements/add
+    defaults: { _controller: AppBundle:Element:add }
+    options:
+        breadcrumb:
+            label: 'Add new'
+            parent_route: chemicals_elements_list
+
+chemicals_elements_edit:
+    path: /chemicals/elements/edit/{id}
+    defaults: { _controller: AppBundle:Element:edit }
+    options:
+        breadcrumb:
+            label: 'Edit %%name%%'
+            parent_route: chemicals_elements_list
+
+chemicals_elements_delete:
+    path: /chemicals/elements/delete/{id}
+    defaults: { _controller: AppBundle:Element:delete }
+
+# Atoms
+chemicals_atoms_add:
+    path: /chemicals/atoms/add
+    defaults: { _controller: AppBundle:Atom:add }
+    options:
+        breadcrumb:
+            label: 'Add new'
+            parent_route: chemicals_atoms_list
+
+chemicals_atoms_edit:
+    path: /chemicals/atoms/edit/{id}
+    defaults: { _controller: AppBundle:Atom:edit }
+    options:
+        breadcrumb:
+            label: 'Edit %%name%%'
+            parent_route: chemicals_atoms_list
+
+chemicals_atoms_delete:
+    path: /chemicals/atoms/delete/{id}
+    defaults: { _controller: AppBundle:Atom:delete }
+
+# Atoms Groups
+chemicals_atomsgroups_add:
+    path: /chemicals/atoms-groups/{moleculeid}/add
+    defaults: { _controller: AppBundle:AtomsGroup:add }    
+    options:
+        breadcrumb:
+            label: 'Add new atoms group'
+            # TODO : parent route has to be molecule.
+            parent_route: chemicals_molecules_list
+
+chemicals_atomsgroups_edit:
+    path: /chemicals/atoms-groups/{moleculeid}/edit/{id}
+    defaults: { _controller: AppBundle:AtomsGroup:edit }
+    options:
+        breadcrumb:
+            label: 'Edit %%name%%'
+            # TODO : parent route has to be molecule.
+            parent_route: chemicals_molecules_list
+
+chemicals_atomsgroups_delete:
+    path: /chemicals/atoms-groups/delete/{id}/molecule/{moleculeid}
+    defaults: { _controller: AppBundle:AtomsGroup:delete }
+
+# Molecules
+chemicals_molecules_add:
+    path: /chemicals/molecules/add
+    defaults: { _controller: AppBundle:Molecule:add }
+    options:
+        breadcrumb:
+            label: 'Add new'
+            parent_route: chemicals_molecules_list
+    
+chemicals_molecules_edit:
+    path: /chemicals/molecules/edit/{id}
+    defaults: { _controller: AppBundle:Molecule:edit }
+    options:
+        breadcrumb:
+            label: 'Edit %%name%%'
+            parent_route: chemicals_molecules_list
+
+chemicals_molecules_delete:
+    path: /chemicals/molecules/delete/{id}
+    defaults: { _controller: AppBundle:Molecule:delete }
+
+# Users
+app_users_list:
+    path: /users/list
+    defaults: { _controller: AppBundle:Default:listUsers}
+
+app_users_set_admin:
+    path: /users/set-admin/{id}
+    defaults: { _controller: AppBundle:Default:setAdmin}
+    requirements:
+        id: \d+
+
+app_users_unset_admin:
+    path: /users/unset-admin/{id}
+    defaults: { _controller: AppBundle:Default:unsetAdmin}
+    requirements:
+        id: \d+

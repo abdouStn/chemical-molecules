@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Add a new atoms group to {{ molecule }} {% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>{% block title1 %}Create new atoms group{% endblock %}</h1>
+    <div class="alert alert-danger">
+        This feature is still a <strong>work in progress</strong>.<br>
+        TODO : finish to implement <a href="http://symfony.com/doc/current/form/form_collections.html">form collections</a>.
+    </div>
+    <p>An atoms group is a regroupment of several atoms.</p>
+
+    {% if form.vars.errors|length %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Errors:</span>
+            <p> Errors :
+            {{ form_errors(form) }}
+            </p>
+        </div>
+    {% endif %}
+
+    {{ form_start(form) }}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Generalities
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.position) }}
+                    {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Main Atom
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="form-group">
+                    {{ form(form.mainAtom) }}
+                </div>
+            </div>
+          </div>
+        </div>
+                
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Atoms
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                <ul class="tags" data-prototype="{{ form_widget(form.atoms.vars.prototype)|e('html_attr') }}">
+                    {% for atom in form.atoms %}
+                        <li>
+                            {{ form(atom) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+          </div>
+        </div>
+                
+    </div>
+
+    <!-- TODO : fix later that shit -->
+    <div style="display:none">
+        {{ form_rest(form) }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default btn-success {% block addAtomGroup %}AGAdder{% endblock %}">{% block button_title %}Add atoms group{% endblock %}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/atomsgroup_form.js') }}"></script>
+{% endblock %}

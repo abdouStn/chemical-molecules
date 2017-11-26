@@ -1,0 +1,65 @@
+chemicals_db_index:
+    path: /
+    defaults: { _controller: ChemicalsBundle:Analysis:index }
+    options:
+        breadcrumb:
+            label: Home
+
+chemicals_db_analysis:
+    path: /chemicals/db/analysis
+    defaults: { _controller: ChemicalsBundle:Analysis:analysis }
+    options:
+        breadcrumb:
+            label: 'DB Analysis'
+            parent_route: chemicals_db_index
+
+# Elements controller.
+chemicals_elements_list:
+    path: /chemicals/elements/list/{page}/{maxPerPage}
+    defaults: { _controller: ChemicalsBundle:Element:list, page: 1, maxPerPage: 10 }
+    options:
+        breadcrumb:
+            label: 'Elements'
+            parent_route: chemicals_db_index
+
+chemicals_elements_display:
+    path: /chemicals/elements/{id}
+    defaults: { _controller: ChemicalsBundle:Element:display }
+    options:
+        breadcrumb:
+            label: '%%name%%'
+            parent_route: chemicals_elements_list
+
+# Atoms controller.
+chemicals_atoms_list:
+    path: /chemicals/atoms/list/{page}/{maxPerPage}
+    defaults: { _controller: ChemicalsBundle:Atom:list, page: 1, maxPerPage: 10 }
+    options:
+        breadcrumb:
+            label: 'Atoms'
+            parent_route: chemicals_db_index
+
+chemicals_atoms_display:
+    path: /chemicals/atoms/{id}
+    defaults: { _controller: ChemicalsBundle:Atom:display }
+    options:
+        breadcrumb:
+            label: '%%name%%'
+            parent_route: chemicals_atoms_list
+
+# Molecules controller.
+chemicals_molecules_list:
+    path: /chemicals/molecules/list/{page}/{maxPerPage}
+    defaults: { _controller: ChemicalsBundle:Molecule:list, page: 1, maxPerPage: 10 }
+    options:
+        breadcrumb:
+            label: 'Molecules'
+            parent_route: chemicals_db_index
+
+chemicals_molecules_display:
+    path: /chemicals/molecules/{id}
+    defaults: { _controller: ChemicalsBundle:Molecule:display }
+    options:
+        breadcrumb:
+            label: '%%name%%'
+            parent_route: chemicals_molecules_list
